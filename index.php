@@ -137,7 +137,7 @@
   </div>
   <div class="row mt-5">
     <!-- <div class="col copyright">
-      <p class="" style="color: white;"><small class="text-white-50">© 2020 | Cpge Kingdom <b>version 1.0</b></small></p>
+      <p class="" style="color: white;"><small class="text-white-50">© 2023 | ROSCA  <b>version beta</b></small></p>
     </div> -->
   </div>
 </div>
