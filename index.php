@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Gestion de colles</title>
+	<title>ROSCA</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -32,7 +32,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style type="text/css">
 	  .links{
-    ul {list-style-type: none;}
+    ul 
+	{
+		list-style-type: none;
+	}
     li a{
       color: white;
       transition: color .2s;
@@ -124,18 +127,18 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-5 col-xs-12 about-company">
-      <a href="../"><img src="images/logo.png" style="margin-top:10px;"></a>
-      <p style="color:white;">Vous pouvez nous contacter pour intégrer votre CPGE dans la plateforme et pour plus d'informations</p>
+      <!-- <a href="../"><img src="images/logo.png" style="margin-top:10px;"></a>
+      <p style="color:white;">Vous pouvez nous contacter pour intégrer votre CPGE dans la plateforme et pour plus d'informations</p> -->
     </div>
     <div class="col-lg-4 col-xs-12 location">
-      <h3 style="color: white;">Contactez-nous :</h3>
-      <p style="color: white;"><i class="fa fa-envelope-o mr-3"></i>info@cpgek.com</p>
+      <!-- <h3 style="color: white;">Contactez-nous :</h3>
+      <p style="color: white;"><i class="fa fa-envelope-o mr-3"></i>info@cpgek.com</p> -->
     </div>
   </div>
   <div class="row mt-5">
-    <div class="col copyright">
+    <!-- <div class="col copyright">
       <p class="" style="color: white;"><small class="text-white-50">© 2020 | Cpge Kingdom <b>version 1.0</b></small></p>
-    </div>
+    </div> -->
   </div>
 </div>
 </div>

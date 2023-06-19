@@ -2,16 +2,10 @@
 	session_start();
 	// variable declaration
 	$username = "";
-	if(!isset($_SESSION['classe'])){
-			$classe="mpsi1";
-	}
-	else{
-			$classe=$_SESSION['classe'];
-	}
 	$errors = array(); 
 	$_SESSION['success'] = "";
 	// connect to database
-	$db = mysqli_connect('localhost','root', '', 'u593112326_simulation');
+	$db = mysqli_connect('localhost','root', '', 'u593112326_rosca');
 	// Change password USER
 	if (isset($_POST['ch_pass'])) {
 		// receive all input values from the form
@@ -73,33 +67,14 @@
 				$_SESSION['username'] = $username;
 				$_SESSION['success'] = "You are now logged in";
 				$_SESSION['type'] = $type;	
-				switch ($type) {
-					case 'admin':
-							header('location: planadmin.php');
-						break;
-					case 'eleve':
-							header('location: planeleve.php');
-						break;
-					case 'prof':
-							header('location: planprof.php');
-						break;
-				}
+
+				header('location: post.php');
 			}else {
 				array_push($errors, "Nom d'utilisateur ou mot de passe incorrect !");
 			}
-		}
-		else{
+		}else{
 			array_push($errors, "Nom d'utilisateur ou mot de passe incorrect !");
 		}
 	}
 }
-	//classe modifier
-	if(isset($_GET['ok'])){
-		$classe = mysqli_real_escape_string($db, $_GET['classe']);
-		$_SESSION['classe']=$classe;
-		}
-		if($_GET['classe']=""){
-			$classe="mpsi1";
-			$_SESSION['classe']=$classe;
-		}
 ?>
