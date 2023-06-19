@@ -5,7 +5,9 @@
 	$errors = array(); 
 	$_SESSION['success'] = "";
 	// connect to database
-	$db = mysqli_connect('localhost','u593112326_rosca', 'c=!k6eO7~', 'u593112326_rosca');
+	//$db = mysqli_connect('localhost','u593112326_rosca', 'c=!k6eO7~', 'u593112326_rosca');
+	$db = mysqli_connect('localhost','u593112326_rosca', 'root', 'root');
+
 	// Change password USER
 	if (isset($_POST['ch_pass'])) {
 		// receive all input values from the form
