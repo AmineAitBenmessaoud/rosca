@@ -7,7 +7,7 @@
 		$semaine=mysqli_real_escape_string($db, $_GET['semaine']);
 		mysqli_query($db,"UPDATE semaine SET debut='$debut',fin='$fin' WHERE week='$semaine'");
 		header('location: planadmin.php');
-	} 
+	}           
 	//add séance 
 	if(isset($_GET['add_seance'])){
 		$seance=mysqli_real_escape_string($db, $_GET['seance']);
