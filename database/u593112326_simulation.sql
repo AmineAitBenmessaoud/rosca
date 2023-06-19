@@ -42,7 +42,7 @@ INSERT INTO `groupe` (`id`, `classe`, `n`) VALUES
 (44, 'MPE1', 7);
 
 -- --------------------------------------------------------
-
+     
 --
 -- Table structure for table `inter`
 --
