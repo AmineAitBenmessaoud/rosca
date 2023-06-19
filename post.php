@@ -45,7 +45,7 @@ echo"
   </thead>";
 echo "<tbody>";
 
-$rosca=mysqli_query($db,"SELECT * FROM rosca JOIN groupe ON rosca.id=groupe.id_rosca JOIN user ON user.id=groupe.id_user WHERE user.username=$username");
+$rosca=mysqli_query($db,"SELECT * FROM rosca JOIN groupe ON rosca.id=groupe.id_rosca JOIN user ON user.id=groupe.id_user WHERE user.username='$username'");
 while($row = mysqli_fetch_array($rosca)){
 	echo "<tr>";
 	echo "<td>".$row['id']."</td>";
