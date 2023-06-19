@@ -31,10 +31,9 @@ if (!$_SESSION['username']){
     <h1> Discussions en cours </h1>
   </div>
   <div class="container">
-
+    
 
   <?php
-
 
   $recupUser = $bdd->query('SELECT * FROM user');
   while ($user = $recupUser->fetch()) {
@@ -72,7 +71,7 @@ if (!$_SESSION['username']){
 </div>
     </div>
   </div>
- 
+
 
 
 </body>
