@@ -5,7 +5,7 @@
 	$errors = array(); 
 	$_SESSION['success'] = "";
 	// connect to database
-	$db = mysqli_connect('localhost','root', '', 'u593112326_rosca');
+	$db = mysqli_connect('localhost','u593112326_rosca', 'c=!k6eO7~', 'u593112326_rosca');
 	// Change password USER
 	if (isset($_POST['ch_pass'])) {
 		// receive all input values from the form
@@ -55,19 +55,16 @@
 		}
 
 		if (count($errors) == 0) {
-			$query = "SELECT * FROM users WHERE username='$username'";
+			$query = "SELECT * FROM user WHERE username='$username'";
 			$results = mysqli_query($db, $query);
 			if (mysqli_num_rows($results) == 1) {
 				while($row = mysqli_fetch_array($results))
 				{
 					$passmode=$row['password'];
-					$type=$row['type'];
 				}
 				if(password_verify($password, $passmode)){
 				$_SESSION['username'] = $username;
-				$_SESSION['success'] = "You are now logged in";
-				$_SESSION['type'] = $type;	
-
+				$_SESSION['success'] = "You are now logged in";	
 				header('location: post.php');
 			}else {
 				array_push($errors, "Nom d'utilisateur ou mot de passe incorrect !");
