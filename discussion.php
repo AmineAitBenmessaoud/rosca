@@ -34,7 +34,6 @@ if (!$_SESSION['username']){
 
 
   <?php
-  // Exécutez cette instruction après que l'utilisateur a été validé et que vous avez récupéré les informations de l'utilisateur à partir de la base de données
 
 
   $recupUser = $bdd->query('SELECT * FROM user');
