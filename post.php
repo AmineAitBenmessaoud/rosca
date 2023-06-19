@@ -37,12 +37,6 @@ echo"
 <thead>
 <tr>
 ";
-
-$rosca=mysqli_query($db,"SELECT * FROM rosca JOIN groupe ON rosca.id=groupe.id_rosca JOIN user ON user.id=groupe.id_user WHERE user.username=$username");
-while($row = mysqli_fetch_array($rosca)){
-	$n=$row['n'];
-}
-
 echo"<th>id</th>";
 echo"<th>type</th>";
 echo"<th>amount</th>";
@@ -51,9 +45,8 @@ echo"
   </thead>";
 echo "<tbody>";
 
-$results=mysqli_query($db,"SELECT * FROM $classe");
-$i=1;
-while($row = mysqli_fetch_array($results)){
+$rosca=mysqli_query($db,"SELECT * FROM rosca JOIN groupe ON rosca.id=groupe.id_rosca JOIN user ON user.id=groupe.id_user WHERE user.username=$username");
+while($row = mysqli_fetch_array($rosca)){
 	echo "<tr>";
 	echo "<td>".$row['id']."</td>";
 	echo "<td>".$row['type']."</td>";
