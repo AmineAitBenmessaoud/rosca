@@ -1,0 +1,32 @@
+/*CSS relatif à la page discussion*/
+
+.form-group {
+    position: relative;
+}
+
+.user-block {
+    display: flex;
+    align-items: center;
+}
+
+.user-photo {
+    margin-right: 10px;
+}
+
+.list-group{
+    padding-bottom: 10px;
+}
+
+ul{
+    margin-bottom: 0;
+}
+
+li{
+    padding-bottom: 1px;
+}
+
+@media (orientation = landscape){
+    li{
+        padding-bottom: 3px;
+    }
+}

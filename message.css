@@ -1,0 +1,216 @@
+﻿
+
+
+
+/*Autres*/
+
+h2 {
+    font-size: 3em;
+    color: #ffffff;
+    font-family: 'Baloo 2', sans-serif;
+}
+
+li {
+    /*listes*/
+    color: #F9F8FF;
+    list-style-type: none;
+}
+
+.container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.container_bis {
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+
+@media (orientation = landscape) and (min-width: 900px){
+  .container_bis {
+    margin-left: 20vw;
+    margin-right: 20vw;
+  }
+}
+
+
+
+
+.title-container {
+    background-color: #E0E0E0; /* Couleur d'arrière-plan légèrement contrastée */
+    border-radius: 10px; /* Arrondir les coins du conteneur */
+    display: inline-block; /* Adapter la taille du conteneur au titre */
+    margin-bottom: 50px; /* Espacement en dessous */
+    padding: 45px 30px; /* Espacement intérieur */
+}
+
+.image-container {
+    margin-right: 20px;
+}
+
+
+
+.btn {
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 5px;
+}
+ 
+
+  .circle {
+    border: 2px solid black;
+    border-radius: 50%;
+    width: 40px; /* Ajustez la taille en largeur */
+    height: 40px; /* Ajustez la taille en hauteur */
+    text-align: center;
+    font-weight: bold;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .circle-outgoing {
+    right: -50px; /* Ajustez la distance entre le cercle et le bloc de message */
+  }
+  
+  .circle-incoming {
+    left: -50px; 
+
+  }
+  
+  .status-circle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #28a745;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  
+  .message {
+    position: relative;
+    padding: 15px;
+    border-radius: 25px;
+    margin-bottom: 10px;
+    clear: both;
+  }
+  
+  .message-incoming {
+    background-color: #e9ecef;
+    color: #212529;
+    float: left;
+    max-width: 95%;
+  }
+  
+  .message-outgoing {
+    background-color: #007bff;
+    color: #fff;
+    float: right;
+    max-width: 95%;
+  }
+  
+  .circle-outgoing {
+    right: -50px; /* Ajustez la distance entre le cercle et le bloc de message */
+  background-color: #007bff;}
+  
+  .circle-incoming {
+    left: -50px; 
+    background-color: #6c757d;
+  }
+  
+  
+  
+  .bottom-button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .form-group {
+    position: relative;
+  }
+
+  .btn-secondary{
+    margin-left: 5px;
+    max-height: 40px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+  
+  input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+  }
+  .destinataire {
+    margin-right: 20px; /* Ajustez cette valeur pour modifier l'espacement entre les éléments */
+  }
+  
+  @media (max-width: 767px) {
+    .circle-outgoing {
+      right: -30px;
+    }
+  
+    .circle-incoming {
+      left: -30px;
+    }
+  
+    .bottom-button-container {
+      flex-direction: column;
+    }
+  
+    .bottom-button-container a,
+    .bottom-button-container input[type="submit"] {
+      margin-bottom: 10px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 992px) {
+    .circle-outgoing {
+      right: -40px;
+    }
+  
+    .circle-incoming {
+      left: -40px;
+    }
+  
+    .bottom-button-container {
+      flex-direction: row;
+    }
+  }
+  @media (min-width: 992px) {
+    .circle-outgoing {
+      right: -50px;
+    }
+  
+    .circle-incoming {
+      left: -50px;
+    }
+  
+    .bottom-button-container {
+      flex-direction: row;
+    }
+}
+
+
+ul{
+    margin-bottom: 0;
+}
+
+li{
+    padding-bottom: 1px;
+}
+
+@media (orientation = landscape){
+    li{
+        padding-bottom: 3px;
+    }
+}

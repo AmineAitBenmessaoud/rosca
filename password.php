@@ -1,1 +1,1 @@
-<?php echo password_hash('rosca1234', PASSWORD_BCRYPT); ?>
+<?php echo password_hash('motdepasse', PASSWORD_BCRYPT); ?>
