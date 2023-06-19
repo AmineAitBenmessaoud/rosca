@@ -31,7 +31,10 @@ if (!$_SESSION['username']){
     <h1> Discussions en cours </h1>
   </div>
   <div class="container">
-    
+    <div class="form-group">
+      <input type="text" id="search-user" class="form-control" placeholder="Rechercher un utilisateur">
+    </div>
+    <div class="list-group" id="search-results"></div>
 
   <?php
 
@@ -71,7 +74,28 @@ if (!$_SESSION['username']){
 </div>
     </div>
   </div>
-
+  <script>
+  $(document).ready(function() {
+    // Écoutez les événements de saisie dans le champ de recherche
+    $("#search-user").on("input", function() {
+      const searchValue = $(this).val();
+      
+      if (searchValue) {
+        // Envoyez une requête AJAX pour obtenir des suggestions d'utilisateur
+        $.ajax({
+          url: "search_user.php",
+          type: "GET",
+          data: { search: searchValue },
+          success: function(data) {
+            $("#search-results").html(data);
+          }
+        });
+      } else {
+        $("#search-results").empty();
+      }
+    });
+  });
+  </script>
 
 
 </body>

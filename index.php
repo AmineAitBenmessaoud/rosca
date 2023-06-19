@@ -89,7 +89,7 @@
 						</span>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate = "Mot de passe est nécessaire">
-						<input class="input100" type="password" name="pass" >
+						<input class="input100" type="password" name="password" >
 						<span class="focus-input100"></span>
 					</div>
 					<?php include('errors.php'); ?>
@@ -99,7 +99,7 @@
 						</button>
 					</div><p>
                             Pas encore de compte ?<p></p>
-                            <a href="register/register.php" class="button">S'inscrire</a><br>
+                            <a href="register.php" class="button">S'inscrire</a><br>
                         </p>
 					</div>
 					

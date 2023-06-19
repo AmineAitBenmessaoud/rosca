@@ -1,9 +1,6 @@
 <?php
-// Démarrage de la session
-session_start();
 //connexion base de données
- include('server.php');
-
+include('server.php');
 
 // Vérification de la méthode de requête
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -19,135 +16,69 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Stockage des données dans la session
     $_SESSION['username'] = $username;
     $_SESSION['password'] = $password;
-
-
-    $query = "SELECT username FROM `user` WHERE username='$username'";
-    $result = mysqli_query($conn, $query);
+   
+    // Verification de l'existence du nom d'utilisateur
+    $query = "SELECT username FROM `user` WHERE username=?";
+    $stmt = mysqli_prepare($db, $query);
+    mysqli_stmt_bind_param($stmt, "s", $username);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
     
     if (mysqli_num_rows($result) != 0) {
         //le nom d'utilisateur existe déjà
-        $error = "un alumni avec le même nom d'utilisateur existe déjà.";
-        header("Location : register.php?error=".$error); # on redirige vers register en précisant cette erreur
+        $error = "Un utilisateur avec le même nom d'utilisateur existe déjà.";
+        header("Location: register.php?error=".$error); # on redirige vers register en précisant cette erreur
+        exit();
     } 
 
+    //ajout user
+ 
+    $verified = 1; // ou la valeur que vous voulez initialiser
+    $photoindex = 'default'; // ou la valeur que vous voulez initialiser
     
-} 
-
-else {
-
-    // Affichage du formulaire
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Mily - Register</title>
+    $query = "INSERT INTO `user` (`username`, `password`, `verified`, `photoindex`) VALUES (?, ?, ?, ?)";
+    $stmt = mysqli_prepare($db, $query);
+    mysqli_stmt_bind_param($stmt, "ssis", $username, $password, $verified, $photoindex);
+    $success = mysqli_stmt_execute($stmt);
     
-    <!--Manrope-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope&display=swap" rel="stylesheet">
-
-    <!--Baloo 2-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&display=swap" rel="stylesheet">
-    <link href="../mainStyle.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-
-<style>
     
-</style>
-
-<body>
-
-<header>
-    <h1>Commencons votre inscription !</h1>
-</header>
-    <br />
-    <div>
-        <center>
-        <?php
-            echo $_GET['error'];
-        ?>
-        </center>
-    </div>
-    <div class="container_register">
-        <div class="connexion">
-            <center>
-                <h2>S'inscrire</h2> <br/>
-                <form method="post" action="register.php">
-                <label for="username">Username:</label><br>
-                <input type="text" id="username" name="username" required><br>
-
-                <label for="password">Password:</label><br>
-                <input type="password" id="password" name="password" required><br>
-
-                <label>Profil:</label><br>
-                <input type="radio" id="student" name="profile" value="student" required>
-                <label for="student">Étudiant</label>
-                <input type="radio" id="alumni" name="profile" value="alumni" required>
-                <label for="alumni">Alumni</label><br>
-
-                <input type="submit" value="Submit">
-                    <br/>
-                </form>      
-            </center>
-        
-        </div>
-    </div> 
-    
-</body>
-</html>
-<?php
-} 
-
-
-
-<?php
-// Démarrage de la session
-session_start();
-//connexion base de données
-include_once("../bd_connect.php");
-
-
-// Vérification de la méthode de requête
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Récupération des données du formulaire
-    $username = isset($_POST['username']) ? $_POST['username'] : "";
-    $password = isset($_POST['password']) ? password_hash($_POST['password'], PASSWORD_DEFAULT) : "";
-    $profile = isset($_POST['profile']) ? $_POST['profile'] : "";
-
-    // Vérification que les données nécessaires sont présentes
-    if (empty($username) || empty($password) || empty($profile)) {
-        die("Erreur : certaines données sont manquantes.");
+    if ($success) {
+        $user_id = mysqli_insert_id($db);
+        $_SESSION['id'] = $user_id;
+    } else {
+        $error = mysqli_error($db);
+        die("Erreur lors de l'insertion du nouvel utilisateur: " . $error);
     }
-
-    // Stockage des données dans la session
-    $_SESSION['username'] = $username;
-    $_SESSION['password'] = $password;
-    $_SESSION['profile'] = $profile;
-
-
-    $query = "SELECT username FROM `user` WHERE username='$username'";
-    $result = mysqli_query($conn, $query);
     
-    if (mysqli_num_rows($result) != 0) {
-        //le nom d'utilisateur existe déjà
-        $error = "un alumni avec le même nom d'utilisateur existe déjà.";
-        header("Location : register.php?error=".$error); # on redirige vers register en précisant cette erreur
-    } 
 
-    // Redirection en fonction du profil vers le bon formulaire
-    if ($profile == 'student') {
-        header('Location: /register/student/student.php');
-        exit();
-    } elseif ($profile == 'alumni') {
-        header('Location: /register/alumnis/form.php');
-        exit();
+
+    // Récupération de l'ID du nouvel utilisateur
+    $query = "SELECT id FROM user WHERE username=?";
+    $stmt = mysqli_prepare($db, $query);
+    mysqli_stmt_bind_param($stmt, "s", $username);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if ($result) {
+        $row = mysqli_fetch_row($result);
+        if ($row) {
+            $_SESSION['id'] = intval($row[0]);
+            $user_id = $_SESSION['id'];
+
+        } else {
+            die("Aucun résultat pour cette requête : " . $query);
+        }
+    } else {
+        die("Erreur lors de l'exécution de la requête : " . $query);
     }
-} 
+}
+
+    
+
+
+
+
+
 
 else {
 
@@ -225,8 +156,7 @@ else {
 
 				<form class="login100-form validate-form flex-sb flex-w" method="post" action="register.php">
 					
-                <label for="username">Username:</label><br>
-                <input type="text" id="username" name="username" required><br>
+                <
                 
                 
                 <span class="login100-form-title p-b-53">
@@ -251,7 +181,7 @@ else {
 						</span>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate = "Mot de passe est nécessaire">
-						<input class="input100" type="password" name="pass" >
+                    <input class="input100" type="password" name="password">
 						<span class="focus-input100"></span>
 					</div>
 					<?php include('errors.php'); ?>
