@@ -1,8 +1,7 @@
 <?php
 session_start();
 $error = "";
-$bdd = new PDO('mysql:host=localhost;port=3307;dbname=u593112326_rosca;charset=utf8', 'root', 'root');
-
+include('connect.php');
 $lastFileId = null;
 $destinataire = array();
 $getid = $_GET['id'] ?? $_POST['id'] ?? null;

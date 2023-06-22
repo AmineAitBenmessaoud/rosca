@@ -62,141 +62,24 @@
 		header('location: secret.php');
 	}
 	//add classe
-	if(isset($_GET['add_classe'])){
-		$newc=mysqli_real_escape_string($db, $_GET['newc']);
-		$ng=mysqli_real_escape_string($db, $_GET['ng']);
-		$seance="seance_".$newc;
-		mysqli_query($db,"CREATE TABLE $seance(
-    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    seance INT(30) NOT NULL,
-    subject VARCHAR(30) NOT NULL,
-    debut VARCHAR(30) NOT NULL,
-    debut_time TIME(4) NOT NULL,
-    fin_time TIME(4) NOT NULL,
-    prof VARCHAR(30) NOT NULL,
-    salle VARCHAR(30) NOT NULL
-	)");
-	$note="note_".$newc;
-	mysqli_query($db,"CREATE TABLE $note(
-    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    student VARCHAR(40) NOT NULL,
-    groupe VARCHAR(30) NOT NULL,
-    matiere VARCHAR(30) NOT NULL,
-    C1 VARCHAR(30) NOT NULL,
-    C2 VARCHAR(30) NOT NULL,
-    C3 VARCHAR(30) NOT NULL,
-    C4 VARCHAR(30) NOT NULL,
-    C5 VARCHAR(30) NOT NULL,
-    C6 VARCHAR(30) NOT NULL,
-    C7 VARCHAR(30) NOT NULL,
-    C8 VARCHAR(30) NOT NULL,
-    C9 VARCHAR(30) NOT NULL,
-    C10 VARCHAR(30) NOT NULL,
-    C11 VARCHAR(30) NOT NULL,
-    C12 VARCHAR(30) NOT NULL,
-    CR1 VARCHAR(30) NOT NULL,
-    CR2 VARCHAR(30) NOT NULL,
-    CR3 VARCHAR(30) NOT NULL,
-    CR4 VARCHAR(30) NOT NULL,
-    CR5 VARCHAR(30) NOT NULL,
-    CR6 VARCHAR(30) NOT NULL,
-    CR7 VARCHAR(30) NOT NULL,
-    CR8 VARCHAR(30) NOT NULL,
-    CR9 VARCHAR(30) NOT NULL,
-    CR10 VARCHAR(30) NOT NULL,
-    CR11 VARCHAR(30) NOT NULL,
-    CR12 VARCHAR(30) NOT NULL,
-    CA1 VARCHAR(30) NOT NULL,
-    CA2 VARCHAR(30) NOT NULL,
-    CA3 VARCHAR(30) NOT NULL,
-    CA4 VARCHAR(30) NOT NULL,
-    CA5 VARCHAR(30) NOT NULL,
-    CA6 VARCHAR(30) NOT NULL,
-    CA7 VARCHAR(30) NOT NULL,
-    CA8 VARCHAR(30) NOT NULL,
-    CA9 VARCHAR(30) NOT NULL,
-    CA10 VARCHAR(30) NOT NULL,
-    CA11 VARCHAR(30) NOT NULL,
-    CA12 VARCHAR(30) NOT NULL,
-    CAR1 VARCHAR(30) NOT NULL,
-    CAR2 VARCHAR(30) NOT NULL,
-    CAR3 VARCHAR(30) NOT NULL,
-    CAR4 VARCHAR(30) NOT NULL,
-    CAR5 VARCHAR(30) NOT NULL,
-    CAR6 VARCHAR(30) NOT NULL,
-    CAR7 VARCHAR(30) NOT NULL,
-    CAR8 VARCHAR(30) NOT NULL,
-    CAR9 VARCHAR(30) NOT NULL,
-    CAR10 VARCHAR(30) NOT NULL,
-    CAR11 VARCHAR(30) NOT NULL,
-    CAR12 VARCHAR(30) NOT NULL
-	)");
-	mysqli_query($db,"INSERT INTO groupe (n,classe) VALUES('$ng','$newc')");
-	/*mysqli_query($db,"CREATE TABLE $newc(
+	if(isset($_GET['add_rosca'])){
+		$type=mysqli_real_escape_string($db, $_GET['type']);
+		$amount=mysqli_real_escape_string($db, $_GET['amount']);
+		$participant=mysqli_real_escape_string($db, $_GET['participant']);
+		$periodicity=mysqli_real_escape_string($db, $_GET['periodicity']);
+		$month=mysqli_real_escape_string($db, $_GET['newc']);
+		$id_user=$_SESSION['id'];
+		mysqli_query($db,"INSERT INTO rosca (type,amount,periodicity,participant) VALUES('$type','$amount','$periodicity','$participant')");
+		$lastID = mysqli_insert_id($db);
+		printf($id_user);
+		mysqli_query($db,"INSERT INTO groupe (id_rosca,id_user,month) VALUES('$lastID','$id_user','$month');");
+		/*mysqli_query($db,"CREATE TABLE $newc(
     week INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     debut DATE NOT NULL,
     fin DATE NOT NULL
 	)");*/
-	if ($ng==8){
-	mysqli_query($db,"CREATE TABLE $newc LIKE plan8");
-	mysqli_query($db,"INSERT $newc SELECT * FROM plan8");
-}
-if($ng==10){
-	mysqli_query($db,"CREATE TABLE $newc LIKE plan");
-	mysqli_query($db,"INSERT $newc SELECT * FROM plan");
-}
-	/*
-	for ($i=1; $i <= $ng ; $i++) { 
-		$y="G".$i;
-		mysqli_query($db,"ALTER TABLE  $newc ADD  $y INT(11) NOT NULL");
+		header('location: post.php');
 	}
-	for ($i=1; $i <= $ng ; $i++) {
-		$y="G2_".$i;
-		mysqli_query($db,"ALTER TABLE  $newc ADD  $y INT(11) NOT NULL");
-		}
-		$tsi=preg_replace('/[0-9]+/','',$newc);
- 		if($tsi=="tsi"){
- 		 for ($i=1; $i <= $ng ; $i++) { 
- 			$y="G3_".$i;
- 		mysqli_query($db,"ALTER TABLE  $newc ADD  $y INT(11) NOT NULL");
-}
-	}
-	$x=0;
-	$z=0;
-	$t=0;
-	for ($i=1; $i <=20 ; $i++) { 
-		mysqli_query($db,"INSERT INTO $newc (week) VALUES ('$i')");
-		for ($j=1; $j <=$ng; $j++) { 	
-			$grp="G".$j;
-			$grp2="G2_".$j;
-			$se=$j-$x;
-			if($se<=0){
-				$se=$ng+$se;
-			}
-			$sel=$z+$ng+1-$x;
-			if($sel<=$ng){
-				$sel=$ng+$sel;
-			}
-			if($sel==($ng+5)){
-				$sel=0;
-				$t=1;
-			}
-			mysqli_query($db,"UPDATE $newc SET $grp='$se' WHERE week='$i'");
-			mysqli_query($db,"UPDATE $newc SET $grp2='$sel' WHERE week='$i'");
-			$z++;
-			if($t==1){
-				$z=0;
-				$t=0;
-			}
-	}
-	$x++;
-	if($x==$ng+1){
-		$x=1;
-	}
-	}*/
-		header('location: secret.php');
-	}
-	//delete classe 
 			if(isset($_GET['delete_classe'])){
 		$newc=mysqli_real_escape_string($db, $_GET['newc']);
 		$classnote="note_".$newc;

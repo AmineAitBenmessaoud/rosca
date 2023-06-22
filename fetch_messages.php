@@ -3,8 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-$bdd = new PDO('mysql:host=localhost;port=3307;dbname=u593112326_rosca;charset=utf8', 'root', 'root');
-
+include('connect.php');
 $getid = $_GET['id'];
 $recupUser = $bdd->prepare('SELECT * FROM user WHERE id = ?');
 $recupUser->execute(array($getid));

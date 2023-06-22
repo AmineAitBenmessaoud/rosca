@@ -1,5 +1,5 @@
+<?php include('connect.php') ?>
 <?php
-$bdd = new PDO('mysql:host=localhost;port=3307;dbname=u593112326_rosca;charset=utf8', 'root', 'root');
 
 $search = $_GET['search'] ?? '';
 

@@ -6,7 +6,7 @@
 	$_SESSION['success'] = "";
 	// connect to database
 	//$db = mysqli_connect('localhost','u593112326_rosca', 'c=!k6eO7~', 'u593112326_rosca');
-	$db = mysqli_connect('localhost:3307','root', 'root', 'u593112326_rosca');
+	$db = mysqli_connect('localhost','root', '', 'u593112326_rosca');
 
 	// Change password USER
 	if (isset($_POST['ch_pass'])) {
@@ -63,9 +63,11 @@
 				while($row = mysqli_fetch_array($results))
 				{
 					$passmode=$row['password'];
+					$id=$row['id'];
 				}
 				if(password_verify($password, $passmode)){
 				$_SESSION['username'] = $username;
+				$_SESSION['id'] = $id;
 				$_SESSION['success'] = "You are now logged in";	
 				header('location: post.php');
 			}else {

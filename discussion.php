@@ -1,8 +1,6 @@
 <?php
 session_start();
-$bdd = new PDO('mysql:host=localhost;port=3307;dbname=u593112326_rosca;charset=utf8', 'root', 'root');
-
-
+include('connect.php');
 if (!$_SESSION['username']){
     header('Location : ../index.html');
 }
