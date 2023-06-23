@@ -80,6 +80,18 @@
 	)");*/
 		header('location: post.php');
 	}
+	if(isset($_GET['add_groupe'])){
+		$id_user=$_SESSION['id'];
+		$id_rosca=$_SESSION['id_rosca'];
+		$month=mysqli_real_escape_string($db, $_GET['month']);
+		mysqli_query($db,"INSERT INTO groupe (id_rosca,id_user,month) VALUES('$id_rosca','$id_user','$month');");
+		/*mysqli_query($db,"CREATE TABLE $newc(
+    week INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    debut DATE NOT NULL,
+    fin DATE NOT NULL
+	)");*/
+		header('location: post.php');
+	}
 			if(isset($_GET['delete_classe'])){
 		$newc=mysqli_real_escape_string($db, $_GET['newc']);
 		$classnote="note_".$newc;

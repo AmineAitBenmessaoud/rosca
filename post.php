@@ -37,22 +37,41 @@ echo"
 <thead>
 <tr>
 ";
+echo"<th>tablet</th>";
 echo"<th>id</th>";
 echo"<th>type</th>";
 echo"<th>amount</th>";
 echo"<th>periodicity</th>";
+echo"<th>remaining places</th>";
+echo"<th>month</th>";
+echo"<th>participate</th>";
 echo"
   </thead>";
 echo "<tbody>";
 
-$rosca=mysqli_query($db,"SELECT * FROM rosca JOIN groupe ON rosca.id = groupe.id_rosca JOIN user ON user.id = groupe.id_user WHERE user.username = '$username'");
+//$rosca=mysqli_query($db,"SELECT * FROM rosca JOIN groupe ON rosca.id = groupe.id_rosca JOIN user ON user.id = groupe.id_user WHERE user.username = '$username'");
+//rosca disponible
+$rosca=mysqli_query($db,"SELECT * FROM rosca ");
 while($row = mysqli_fetch_array($rosca)){
+	if($row['participant']>$row['actual_participants']){
+	$id_rosca=$row['id'];
+	$_SESSION['id_rosca']=$id_rosca;
 	echo "<tr>";
+	echo "<td>";
+	echo $_SESSION['id_rosca'];
+	echo $_SESSION['id'];
+	echo "</td>";
 	echo "<td>".$row['id']."</td>";
 	echo "<td>".$row['type']."</td>";
 	echo "<td>".$row['amount']."</td>";
 	echo "<td>".$row['periodicity']."</td>";
-echo "</tr>";
+	echo "<td>".$row['participant']-$row['actual_participants']."</td>";
+ 	echo "<form method='get' action='action.php'>"; ?>
+	<td><input type="number" min="1" value="1" max="12" name="month" style="width: 100px;" class="form-control"></td>
+	<?php
+	echo "<td><button  class='btn btn-outline-primary' name='add_groupe'>Add to the groupe</button>
+	</td></form>";
+ echo "</tr>";}
 }
 echo "</tbody>";
 echo"</table></div>";
