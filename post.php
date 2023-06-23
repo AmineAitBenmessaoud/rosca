@@ -25,19 +25,18 @@ $username=$_SESSION['username'];
       <label for="check" class="checkbtn">
         <i class="fas fa-bars"></i>
       </label>
-	  <label class="logo"><img src="images/logo.png" height="85px" style="padding-bottom:10px;"></label>
+	  <!-- <label class="logo"><img src="images/logo.png" height="85px" style="padding-bottom:10px;"></label> -->
       <ul>
         <li><a class="active" href="post.php">Post</a></li>
       </ul>
     </nav>  
 <?php
 echo"
-<h3 style='color:#9933ff;'>Rosca</h3>
+<div class='glory'><h3 style='color:#9933ff;'>Rosca</h3>
 <div style='overflow-x:auto;''><table  class='content-table' >
 <thead>
 <tr>
 ";
-echo"<th>tablet</th>";
 echo"<th>id</th>";
 echo"<th>type</th>";
 echo"<th>amount</th>";
@@ -57,14 +56,16 @@ while($row = mysqli_fetch_array($rosca)){
 	$id_rosca=$row['id'];
 	$_SESSION['id_rosca']=$id_rosca;
 	echo "<tr>";
-	echo "<td>";
-	echo $_SESSION['id_rosca'];
-	echo $_SESSION['id'];
-	echo "</td>";
 	echo "<td>".$row['id']."</td>";
-	echo "<td>".$row['type']."</td>";
+	if($row['type']==1){echo "<td>Traditionnel</td>";
+	}else{
+		echo "<td>Parallèle</td>";
+	}
 	echo "<td>".$row['amount']."</td>";
-	echo "<td>".$row['periodicity']."</td>";
+	if($row['periodicity']==1){echo "<td>Mensuel</td>";
+	}else{
+		echo "<td>Bimensuelle</td>";
+	}
 	echo "<td>".$row['participant']-$row['actual_participants']."</td>";
  	echo "<form method='get' action='action.php'>"; ?>
 	<td><input type="number" min="1" value="1" max="12" name="month" style="width: 100px;" class="form-control"></td>
@@ -76,7 +77,7 @@ while($row = mysqli_fetch_array($rosca)){
 echo "</tbody>";
 echo"</table></div>";
 ?>
-<div class="glory">
+
 			<h2 style="color: #330066; margin-top: 20px;"><strong>Ajouter un post:</strong></h2>
 		<form method="get" action="action.php"> 
 	<div style='overflow-x:auto;'>
