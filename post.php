@@ -71,40 +71,29 @@ echo"</div>";
 
 			<h2 style="color: #330066; margin-top: 20px;"><strong>Ajouter un post:</strong></h2>
 		<form method="get" action="action.php"> 
-	<div style='overflow-x:auto;'>
-	<table class="content-table">
-	<thead>
-		<tr>
-		<th>Type</th>
-		<th>amount</th>
-		<th>Nbr de participant</th>
-		<th>Périodicité</th>
-		<th>Date souhaitée</th>
-	</tr>
-	</thead>	
-	<tbody>
-		<tr>
-	<td>
+	<div>
+	<h4>Type</h4>
 <select name="type">
   <option value="1">trad</option>
   <option value="2">para</option>
-</select></td>
-	<td><input type="number" min="1" value="1" name="amount" style="width: 100px;" class="form-control"></td>
-	<td><input type="number" min="1" value="1" name="participant" style="width: 100px;" class="form-control"></td>
-	<td>
-<select name="periodicity">
+</select>
+<h4>amount</h4>
+<input type="number" min="1" value="1" name="amount" style="width: 100px;" class="form-control">
+	<h4> de participant</h4>
+<input type="number" min="1" value="1" name="participant" style="width: 100px;" class="form-control">
+
+	<h4>Périodicité</h4>
+	<select name="periodicity">
   <option value="1">monsuelle</option>
   <option value="2">bimensuelle</option>
   <option value="3">trimestrielle</option>
-</select></td>
-<td>
-
+</select>
+<h4>Date souhaitée</h4>
 <input type="number" min="1" value="1" max="12" name="month" style="width: 100px;" class="form-control">
 
-</td>
-		</tr>
-</tbody>
-</table></div>
+<h4>comment</h4>
+<input type="text" name="comment" style="width: 100px; height :150 px;">
+</div>
 <button  class="btn btn-outline-primary" name="add_rosca">Add</button>
 </form>
 <br>

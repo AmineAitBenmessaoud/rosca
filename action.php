@@ -5,9 +5,10 @@
 		$amount=mysqli_real_escape_string($db, $_GET['amount']);
 		$participant=mysqli_real_escape_string($db, $_GET['participant']);
 		$periodicity=mysqli_real_escape_string($db, $_GET['periodicity']);
-		$month=mysqli_real_escape_string($db, $_GET['newc']);
+		$month=mysqli_real_escape_string($db, $_GET['month']);
+		$comment=mysqli_real_escape_string($db, $_GET['comment']);
 		$id_user=$_SESSION['id'];
-		mysqli_query($db,"INSERT INTO rosca (type,amount,periodicity,participant) VALUES('$type','$amount','$periodicity','$participant')");
+		mysqli_query($db,"INSERT INTO rosca (type,amount,periodicity,participant,comment) VALUES('$type','$amount','$periodicity','$participant','$comment')");
 		$lastID = mysqli_insert_id($db);
 		printf($id_user);
 		mysqli_query($db,"INSERT INTO groupe (id_rosca,id_user,month) VALUES('$lastID','$id_user','$month');");
