@@ -33,49 +33,40 @@ $username=$_SESSION['username'];
 <?php
 echo"
 <div class='glory'><h3 style='color:#9933ff;'>Rosca</h3>
-<div style='overflow-x:auto;''><table  class='content-table' >
-<thead>
-<tr>
-";
-echo"<th>id</th>";
-echo"<th>type</th>";
-echo"<th>amount</th>";
-echo"<th>periodicity</th>";
-echo"<th>remaining places</th>";
-echo"<th>month</th>";
-echo"<th>participate</th>";
-echo"
-  </thead>";
-echo "<tbody>";
-
-//$rosca=mysqli_query($db,"SELECT * FROM rosca JOIN groupe ON rosca.id = groupe.id_rosca JOIN user ON user.id = groupe.id_user WHERE user.username = '$username'");
-//rosca disponible
-$rosca=mysqli_query($db,"SELECT * FROM rosca ");
+<div style='overflow-x:auto;'>";
+$id_user=$_SESSION['id'];
+$groups=mysqli_query($db,"SELECT id_rosca FROM groupe WHERE id_user='$id_user'");
+$id_rosca_actually_in=array();
+while($row_groups =mysqli_fetch_array($groups)){
+	array_push($id_rosca_actually_in,$row_groups['id_rosca']);
+}
+$rosca=mysqli_query($db,"SELECT * FROM rosca");
 while($row = mysqli_fetch_array($rosca)){
-	if($row['participant']>$row['actual_participants']){
+	if($row['participant']>$row['actual_participants'] && ! in_array($row['id'],$id_rosca_actually_in) ){
 	$id_rosca=$row['id'];
 	$_SESSION['id_rosca']=$id_rosca;
-	echo "<tr>";
-	echo "<td>".$row['id']."</td>";
-	if($row['type']==1){echo "<td>Traditionnel</td>";
+	echo "<div id='rosca_box' style='border: thick double #32a1ce;'>";
+	echo "<h2 style='color:blue;'>Rosca Numéro ".$row['id']."</h2>";
+	if($row['type']==1){echo "Traditionnel";
 	}else{
-		echo "<td>Parallèle</td>";
+		echo "</br><p> Type : Parallèle</p>";
 	}
-	echo "<td>".$row['amount']."</td>";
-	if($row['periodicity']==1){echo "<td>Mensuel</td>";
+	echo "</br><p>Le montant :".$row['amount']."</p>";
+	if($row['periodicity']==1){echo "</br><p> Type : Mensuelle</p>";
 	}else{
-		echo "<td>Bimensuelle</td>";
+		echo "</br><p> Type : Bimensuelle</p>";
 	}
-	echo "<td>".$row['participant']-$row['actual_participants']."</td>";
- 	echo "<form method='get' action='action.php'>"; ?>
-	<td><input type="number" min="1" value="1" max="12" name="month" style="width: 100px;" class="form-control"></td>
+	echo "</br><p>Nombre de place libre : ".$row['participant']-$row['actual_participants']."</p>";
+	echo "</br><p> commentaire :".$row['comment']."</p>";
+ 	echo "<form method='post' action='action.php?id_rosca=".$id_rosca."'>"; ?>
+	<h4>Choose the month :</h4>
+	<input type="number" min="1" value="1" max="12" name="month" style="width: 100px;" class="form-control">
 	<?php
-	echo "<td><button  class='btn btn-outline-primary' name='add_groupe'>Add to the groupe</button>
-	</td></form>";
- echo "</tr>";}
+	echo "<button  class='btn btn-outline-primary' name='add_groupe'>Add to the groupe</button>
+	</form>";
+ echo "</div>";}
 }
-echo "</tbody>";
-echo"</table></div>";
+echo"</div>";
 ?>
 
 			<h2 style="color: #330066; margin-top: 20px;"><strong>Ajouter un post:</strong></h2>
