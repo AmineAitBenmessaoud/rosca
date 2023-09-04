@@ -6,8 +6,8 @@
 	$_SESSION['success'] = "";
 	// connect to database
 	//$db = mysqli_connect('localhost','u593112326_rosca', 'c=!k6eO7~', 'u593112326_rosca');
-	//$db = mysqli_connect('localhost','root', '', 'u593112326_rosca');
-		$db = mysqli_connect('localhost','root', 'root', 'u593112326_rosca',3306);
+	$db = mysqli_connect('localhost','root', '', 'u593112326_rosca');
+		//$db = mysqli_connect('localhost','root', 'root', 'u593112326_rosca',3306);
 
 
 	// Change password USER
