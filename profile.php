@@ -10,19 +10,14 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-$host = 'localhost';
-$db   = 'u593112326_rosca';
-$user = 'root';  // Your database username
-$pass = 'root';      // Your database password
-$charset = 'utf8mb4';
+include('connect.php');
 
-$pdo = new PDO("mysql:host=$host;port=3306;dbname=$db;charset=$charset", $user, $pass);
 
 $friends = [];
 $friendRequests = [];
 
 // Fetch friend requests and mutual friends
-$stmt = $pdo->prepare("
+$stmt = $bdd->prepare("
 SELECT fr.*, u.username,
 (SELECT GROUP_CONCAT(u2.username) 
  FROM friends AS f1
@@ -43,7 +38,7 @@ while ($row = $stmt->fetch()) {
 }
 
 // Fetch friends
-$stmt = $pdo->prepare("
+$stmt = $bdd->prepare("
     SELECT f.*, u.username 
     FROM friends AS f 
     JOIN user AS u ON f.friend_id = u.id
@@ -57,16 +52,16 @@ while ($row = $stmt->fetch()) {
 // Handle post requests for accepting or rejecting friend requests
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['acceptRequest'])) {
-        $stmt = $pdo->prepare("UPDATE friend_requests SET status='ACCEPTED' WHERE id = ?");
+        $stmt = $bdd->prepare("UPDATE friend_requests SET status='ACCEPTED' WHERE id = ?");
         $stmt->execute([$_POST['request_id']]);
         
         // Add to friends table
-        $stmt = $pdo->prepare("INSERT INTO friends (user_id, friend_id) VALUES (?, ?), (?, ?)");
+        $stmt = $bdd->prepare("INSERT INTO friends (user_id, friend_id) VALUES (?, ?), (?, ?)");
         $stmt->execute([$_SESSION['user_id'], $_POST['sender_id'], $_POST['sender_id'], $_SESSION['user_id']]);
     }
 
     if (isset($_POST['rejectRequest'])) {
-        $stmt = $pdo->prepare("UPDATE friend_requests SET status='REJECTED' WHERE id = ?");
+        $stmt = $bdd->prepare("UPDATE friend_requests SET status='REJECTED' WHERE id = ?");
         $stmt->execute([$_POST['request_id']]);
     }
 }
