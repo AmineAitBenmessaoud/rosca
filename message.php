@@ -76,8 +76,8 @@ if ((isset($_GET['id']) AND !empty($_GET['id'])) || (isset($_POST['id']) AND !em
 
           // Ajout d'une condition pour vérifier si un fichier a été joint ou non
           if (!isset($_FILES['file']) || $_FILES['file']['error'] == UPLOAD_ERR_NO_FILE || $lastFileId !== null) {
-              $insererMessage = $bdd->prepare('INSERT INTO message (message, id_destinataire, id_auteur, id_fichier) VALUES (?,?,?,?)');
-              $insererMessage->execute(array($message, $getid, $_SESSION['id'], $lastFileId));
+              $insererMessage = $bdd->prepare('INSERT INTO message (message, id_destinataire, id_auteur, id_fichier,id_rosca) VALUES (?,?,?,?,?)');
+              $insererMessage->execute(array($message, $getid, $_SESSION['id'], $lastFileId, 0));
               $errorInfo = $insererMessage->errorInfo();
 
               header('Location: message.php?id=' . $getid);
