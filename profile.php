@@ -90,11 +90,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="card-header">Friend Requests</div>
     <ul class="list-group list-group-flush" id="friendRequestsList">
     <?php foreach ($friendRequests as $request) {
-    $mutualFriends = explode(",", $request['mutual_friends']);
+    $mutualFriends = ($request['mutual_friends'] !== null) ? explode(",", $request['mutual_friends']) : []; // Modification ici
     $displayMutualFriends = count($mutualFriends) > 1 
         ? htmlspecialchars($mutualFriends[0], ENT_QUOTES, 'UTF-8') . " et <span class='text-blue'>d'autres personnes en commun</span>" 
         : htmlspecialchars($request['mutual_friends'], ENT_QUOTES, 'UTF-8');
-    ?>
+?>
     <li class="list-group-item" data-id="<?php echo $request['id']; ?>">
         User: <?php echo htmlspecialchars($request['username'], ENT_QUOTES, 'UTF-8'); ?>
         <span class="mutualFriendsList"></span><span onclick="showMutualFriends(this, '<?php echo implode(", ", $mutualFriends); ?>')">Amis en commun: <?php echo $displayMutualFriends; ?></span>
